@@ -1,0 +1,8 @@
+#node_module
+./node_modules
+node_modules
+/node_modules
+
+
+# ignores all .md files
+.md
