@@ -6,3 +6,5 @@ node_modules
 
 # ignores all .md files
 .md
+
+config.js

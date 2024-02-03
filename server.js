@@ -1,7 +1,3 @@
-/* Global Variables */
-api_key = "&appid=0d25017d052ba09067ed0b8f034e79a5";
-url = "https://api.openweathermap.org/data/2.5/weather?units=metric&zip=";
-
 // Setup empty JS object to act as endpoint for all routes
 projectData = {};
 
@@ -13,6 +9,7 @@ let newDate = d.getMonth() + "-" + d.getDate() + "-" + d.getFullYear();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const config = require("./config.js");
 
 const app = express();
 const port = 8000;
@@ -48,15 +45,15 @@ app.get(`/`, async (req, res) => {
   const feeling = req.query.feeling;
 
   try {
-    const response = await fetch(`${url}${zipcode}${api_key}`);
+    const response = await fetch(
+      `${config.URL}${zipcode}&appid=${config.API_KEY}`
+    );
     const data = await response.json();
     //passing data to projectData
     projectData.temperature = data.main.temp;
     projectData.date = newDate;
     projectData.country = data.sys.country;
     projectData.userResponse = feeling;
-
-    console.log(projectData);
     res.send(projectData);
   } catch (error) {
     console.log(error.message);
